@@ -2,6 +2,7 @@ package algorithm;
 
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.List;
 import java.util.PriorityQueue;
 
 /**
@@ -22,6 +23,7 @@ public class Solution {
     /**
      * 头插法
      * 会改变插入顺序，输入1,2,3,4,5 -- 输出5,4,3,2,1
+     *
      * @param val
      */
     public void headInsert(int[] val) {
@@ -43,12 +45,12 @@ public class Solution {
      * 尾插法
      */
     public void tailInsert(int[] val) {
-        ListNode dummy=new ListNode(0);//用于记录头结点位置
-        ListNode temp=dummy;
-        for (int i = 0; i <val.length ; i++) {
-            ListNode node=new ListNode(val[i]);
-            temp.next=node;
-            temp=temp.next;
+        ListNode dummy = new ListNode(0);//用于记录头结点位置
+        ListNode temp = dummy;
+        for (int i = 0; i < val.length; i++) {
+            ListNode node = new ListNode(val[i]);
+            temp.next = node;
+            temp = temp.next;
         }
         print(dummy.next);
     }
@@ -60,7 +62,7 @@ public class Solution {
      */
     public void print(ListNode node) {
         while (node != null) {
-            System.out.print(node.val+" ");
+            System.out.print(node.val + " ");
             node = node.next;
         }
         System.out.println();
@@ -79,6 +81,29 @@ public class Solution {
             head = head.next;
         }
         return count;
+    }
+
+    /**
+     * 链表的中间节点
+     * 1,2,3,4, 5,6, 7,8,9,10
+     * 1,2,3,4, 5, 6,7,8,9
+     *
+     * @param head
+     * @return
+     */
+    public ListNode middleNode(ListNode head) {
+        if (head == null)
+            return head;
+        ListNode slow = head;
+        ListNode fast = head;
+        while (fast.next != null && fast.next.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        if (fast.next == null)  // 长度为奇数
+            return slow;
+        else
+            return slow.next;  // 长度为偶数
     }
 
 
@@ -397,6 +422,7 @@ public class Solution {
     /**
      * 两个链表生成相加链表 正向
      * 反转+头插法 / 栈
+     *
      * @param l1
      * @param l2
      * @return
@@ -468,6 +494,23 @@ public class Solution {
      */
     public boolean isPail(ListNode head) {
         // write code here
+        //中间节点
+        if (head == null || head.next == null) return true;
+
+        ListNode slow = head;
+        ListNode fast = head;
+        while (fast.next != null && fast.next.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        ListNode mNode = slow.next;
+        ListNode node = reverseList(mNode);
+
+        while (node != null) {
+            if (node.val != head.val) return false;
+            node = node.next;
+            head = head.next;
+        }
         return true;
     }
 
@@ -484,23 +527,88 @@ public class Solution {
             要求使用原地算法，不能改变节点内部的值，需要对实际的节点进行交换。
             例如：
             对于给定的单链表{10,20,30,40}，将其重新排序为{10,40,20,30}.
+            40 30 20 10
+
+            1,2,3,4, 5,6, 7,8,9,10
+            1,2,3,4, 5,   6,7,8,9
+            对于有传入节点的，进行链表的拼接与结合时，不需要声明临时变量保存头节点，因为函数调用结束时，实参仍然是原来的节点地址
      */
     public void reorderList(ListNode head) {
+        if (head == null || head.next == null || head.next.next == null) return;
+        //找到中间节点
+        ListNode slow = head;
+        ListNode fast = head.next;
+        while (fast != null && fast.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        ListNode mid = slow.next;
+        slow.next = null;
+        ListNode newHead = reverse(mid);
 
+        while (newHead != null) {
+            //交叉合并
+            ListNode temp = newHead.next;
+            newHead.next = head.next;
+            head.next = newHead;
+
+            //两链指向对应的下一节点
+            head = newHead.next;
+            newHead = temp;
+        }
+    }
+
+    /**
+     * 重排链表 ArrayList解决方案
+     * head有n个节点 则空间O(n)
+     *
+     * @param head
+     */
+    public void recorderListArrayList(ListNode head) {
+        if (head == null)
+            return;
+        List<ListNode> list = new ArrayList<>();   //  ArrayList为线性表
+        // 将 链表的每一个节点依次 存进ArrayList中
+        while (head != null) {
+            list.add(head);
+            head = head.next;
+        }
+        // 两个指正依次从前 后进行遍历取元素
+        int i = 0, j = list.size() - 1;
+        while (i < j) {
+            //  eg:  1->2->3->4
+            // 前面的节点的下一个节点指向最后的节点
+            list.get(i).next = list.get(j);  //  即 1->4
+            i++;  // 此时 i++ 则此时 list.get(i) 为原来前面节点的下一个节点   即节点2
+            if (i == j) // 若 链表长度为偶数的情况下 则会提前相遇，此时已达到题目要求，直接终止循环
+                break;
+            list.get(j).next = list.get(i);   // 4->2
+            // 此时刚刚的例子则变为  1->4->2->3
+            j--;
+        }
+        list.get(i).next = null;  // 最后一个节点的下一个节点为null
     }
 
     public static void main(String[] args) {
         Solution s = new Solution();
 
-//        ListNode head1 = new ListNode(1);
-//        ListNode head2 = new ListNode(2);
-//        ListNode head3 = new ListNode(3);
-//        ListNode head4 = new ListNode(4);
-//        ListNode head5 = new ListNode(5);
-//        head1.next = head2;
-//        head2.next = head3;
-//        head3.next = head4;
-//        head4.next = head5;
+        ListNode head1 = new ListNode(1);
+        ListNode head2 = new ListNode(2);
+        ListNode head3 = new ListNode(3);
+        ListNode head4 = new ListNode(4);
+        ListNode head5 = new ListNode(5);
+        ListNode head6 = new ListNode(6);
+        head1.next = head2;
+        head2.next = head3;
+        head3.next = head4;
+        head4.next = head5;
+        head5.next = head6;
+
+        s.reorderList(head1);
+        s.print(head1);
+        //链表的中间节点
+//        ListNode node = s.middleNode(head1);
+//        s.print(node);
 
         //判断是否有环
 //        head5.next = head3;
