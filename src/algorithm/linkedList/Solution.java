@@ -1,4 +1,4 @@
-package algorithm;
+package algorithm.linkedList;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -587,6 +587,55 @@ public class Solution {
             j--;
         }
         list.get(i).next = null;  // 最后一个节点的下一个节点为null
+    }
+
+    /**
+     * 链表中倒数第k个结点
+     * @param pHead
+     * @param k
+     * @return
+     */
+    public ListNode FindKthToTail (ListNode pHead, int k) {
+        ListNode slow = pHead, fast = pHead;
+        for (int i = 0; i < k; i++){
+            if (fast == null) return fast;
+            fast = fast.next;
+        }
+
+        while (fast != null) {
+            fast = fast.next;
+            slow = slow.next;
+        }
+        return slow;
+    }
+
+    /**
+     * 删除链表的倒数第n个节点并返回链表的头指针
+     * @param head
+     * @param n
+     * @return
+     */
+    public ListNode removeNthFromEnd (ListNode head, int n) {
+        // write code here
+        if(head ==null) return head;
+        //考虑到删除倒数第n个节点有可能是头节点，这种情况下，则必须新建的临时头结点替代
+        ListNode dummy=new ListNode(0);
+        dummy.next=head;
+        ListNode slow=dummy;
+        ListNode fast=dummy;
+
+        int i=0;
+        while(fast!=null && i<n+1){
+            fast=fast.next;
+            i++;
+        }
+        while(fast!=null){
+            fast=fast.next;
+            slow=slow.next;
+        }
+        slow.next=slow.next.next;
+        return dummy.next;
+
     }
 
     public static void main(String[] args) {
