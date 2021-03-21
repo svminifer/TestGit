@@ -545,7 +545,6 @@ public class Solution {
         ListNode mid = slow.next;
         slow.next = null;
         ListNode newHead = reverse(mid);
-
         while (newHead != null) {
             //交叉合并
             ListNode temp = newHead.next;
@@ -637,6 +636,48 @@ public class Solution {
         return dummy.next;
 
     }
+
+    /**
+     * 单链表的排序 O（nlogn）
+     * @param head
+     * @return
+     */
+    public static ListNode sortInList (ListNode head) {
+        // write code here
+        if(head == null || head.next == null)
+            return head;
+        //使用快慢指针找到中点
+        ListNode slow = head, fast = head.next;
+        while(fast!=null && fast.next !=null){
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        //分割为两个链表
+        ListNode newList = slow.next;
+        slow.next = null;
+        //将两个链表继续分割
+        ListNode left = sortInList(head);
+        ListNode right = sortInList(newList);
+
+        ListNode lhead = new ListNode(-1);
+        ListNode res = lhead;
+        //归并排序
+        while(left != null && right != null){
+            if(left.val < right.val){
+                lhead.next = left;
+                left = left.next;
+            }else{
+                lhead.next = right;
+                right = right.next;
+            }
+            lhead = lhead.next;
+        }
+        //判断左右链表是否为空
+        lhead.next = left!=null?left:right;
+        return res.next;
+    }
+
+
 
     public static void main(String[] args) {
         Solution s = new Solution();
