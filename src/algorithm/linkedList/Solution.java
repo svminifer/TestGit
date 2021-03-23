@@ -1,9 +1,6 @@
 package algorithm.linkedList;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.PriorityQueue;
+import java.util.*;
 
 /**
  * @author kaboso
@@ -346,6 +343,7 @@ public class Solution {
                 queue.offer(node.next);
             }
         }
+
 
         return head.next;
     }
@@ -728,6 +726,9 @@ public class Solution {
 //        int[] val = {1, 2, 3, 4, 5};
 //        s.headInsert(val);//头插法
 //        s.tailInsert(val);//尾插法
+
+        List<int[]> answer = new ArrayList<>();
+        int[][] ints = answer.toArray(new int[3][]);
 
     }
 }
