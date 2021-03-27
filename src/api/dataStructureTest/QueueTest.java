@@ -2,9 +2,10 @@ package api.dataStructureTest;
 
 import api.compareTest.Student;
 
-import java.util.Deque;
-import java.util.LinkedList;
-import java.util.Queue;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.*;
 
 /**
  * @Author kaboso
@@ -39,6 +40,20 @@ public class QueueTest {
 //      如果：queue的引用类型为 Queue<Student> queue
 //      则使用queue.get(1);由于多态的特性，会导致编译错误，
 // 这时候必须将改为LinkedList<Student> queue。因为Queue接口没有get方法，但LinkedList有
+
+        ArrayList arrayList = new ArrayList();
+        arrayList.add(1);
+        arrayList.add("123");
+
+
+        System.out.println(arrayList.get(0) instanceof Integer);
+        System.out.println(arrayList.get(1) instanceof String);
+        BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
+        try {
+            String s = input.readLine();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
 
     }
