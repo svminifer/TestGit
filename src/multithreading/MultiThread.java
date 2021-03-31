@@ -9,6 +9,7 @@ import java.lang.management.ThreadMXBean;
  * @Date 2021/3/26
  */
 public class MultiThread {
+
     public static void main(String[] args) {
         // 获取 Java 线程管理 MXBean
         ThreadMXBean threadMXBean = ManagementFactory.getThreadMXBean();
@@ -18,6 +19,5 @@ public class MultiThread {
         for (ThreadInfo threadInfo : threadInfos) {
             System.out.println("[" + threadInfo.getThreadId() + "] " + threadInfo.getThreadName());
         }
-
     }
 }
