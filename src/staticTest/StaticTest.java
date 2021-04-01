@@ -31,6 +31,10 @@ public  class StaticTest{
         HashMap<String, String> stringStringHashMap = new HashMap<>(14);
         stringStringHashMap.put("s","s");
 
+
+
+
+
         Iterator iterator = sets.iterator();
         while (iterator.hasNext()) {
             Object next = iterator.next();

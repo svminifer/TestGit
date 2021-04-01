@@ -19,5 +19,6 @@ public class MultiThread {
         for (ThreadInfo threadInfo : threadInfos) {
             System.out.println("[" + threadInfo.getThreadId() + "] " + threadInfo.getThreadName());
         }
+
     }
 }
