@@ -62,4 +62,7 @@ public class Main {
 
 
     }
+    public static void testCampanyConnect(){
+        System.out.println("test connect!");
+    }
 }
