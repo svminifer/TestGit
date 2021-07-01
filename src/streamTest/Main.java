@@ -43,7 +43,6 @@ public class Main {
 
 	public static void MapToList(){
 		List<Player> players = playerMap.values().stream().collect(Collectors.toList());
-
 		System.out.println(Arrays.toString(players.toArray()));
 	}
 
