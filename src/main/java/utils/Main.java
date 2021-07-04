@@ -1,3 +1,5 @@
+package utils;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicStampedReference;
@@ -5,7 +7,7 @@ import java.util.concurrent.atomic.AtomicStampedReference;
 
 public class Main {
 
-	public static void main(String[] args) {
+    public static void main(String[] args) {
 //		Player player = new Player();
 //		player.setId(1);
 //		player.setMailboxId(1);
@@ -37,7 +39,7 @@ public class Main {
 //		// 初始化AtomicStampedReference对象，值为5，版本号为1
 //		AtomicStampedReference<Map<Integer, List<Integer>>> atomicMap = new AtomicStampedReference<Map<Integer, List<Integer>>>(listHashMap, 1);
 
-		// 初始化AtomicStampedReference对象，值为5，版本号为1
+        // 初始化AtomicStampedReference对象，值为5，版本号为1
 //		AtomicStampedReference<Integer> atomic = new AtomicStampedReference<Integer>(5, 1);
 //
 //		new Thread(() -> {
@@ -79,8 +81,8 @@ public class Main {
 //		System.out.println(a.getBytes().length);
 //		System.out.println(b.getBytes().length);
 
-		System.out.println((int)(Double.valueOf("0.1") * 1.0));
-		System.out.println((int)(Double.parseDouble("0.1") * 1.0));
-	}
+        System.out.println((int)(Double.valueOf("0.1") * 1.0));
+        System.out.println((int)(Double.parseDouble("0.1") * 1.0));
+    }
 
 }
