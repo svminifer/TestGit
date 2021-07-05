@@ -32,6 +32,9 @@ public class Test {
 		map.put(122222, "2");
 		map.put(ints, "3");
 
+		System.out.println("测试新ssh");
+
+
     }
 
 }
