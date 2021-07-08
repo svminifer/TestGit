@@ -10,15 +10,18 @@ import java.util.HashMap;
  */
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ClassNotFoundException, IllegalAccessException, InstantiationException {
         Fruit apple = new Apple();
 
 
         Fruit fruit = new Apple();
         Apple applea = (Apple) fruit;
 
+        Class<?> name = Class.forName("objectTest.Fruit");
 
+        Object o = name.newInstance();
 
+        System.out.println(o instanceof Fruit);
     }
 }
 
