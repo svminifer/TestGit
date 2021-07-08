@@ -22,17 +22,17 @@ public class Test {
 
 		Double aDouble = new Double(1.0);
 
-		Double dfdf = null;
+        Double dfdf = null;
 
-		HashMap<Integer, String> map = new HashMap<>();
+        HashMap<Integer, String> map = new HashMap<>();
 
-		Integer integer = new Integer(122222);
-		int ints = 122222;
-		map.put(integer, "1");
-		map.put(122222, "2");
-		map.put(ints, "3");
+        Integer integer = new Integer(122222);
+        int ints = 122222;
+        map.put(integer, "1");
+        map.put(122222, "2");
+        map.put(ints, "3");
 
-		System.out.println("测试新ssh");
+        System.out.println("测试新 user");
 
 
     }
