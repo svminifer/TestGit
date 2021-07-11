@@ -1,9 +1,5 @@
 package annotationTest;
 
-import java.lang.annotation.Annotation;
-import java.lang.annotation.Retention;
-import java.lang.reflect.Method;
-
 /**
  * @Target 目标
  * @Retention 保留  不写默认为CLASS
@@ -22,8 +18,11 @@ public class Main {
             Main main = new Main();
             Value method = main.getClass().getMethod("test").getAnnotation(Value.class);
 
+
             System.out.println(method.value());
             System.out.println(method.name());
+
+            Value test = main.getClass().getMethod("test").getAnnotation(Value.class);
 
         } catch (NoSuchMethodException e) {
             e.printStackTrace();
