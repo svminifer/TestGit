@@ -7,6 +7,18 @@
     <groupId>com.github.svminifer</groupId>
     <artifactId>TestGit</artifactId>
     <version>1.0</version>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>8</source>
+                    <target>8</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
     <dependencies>
         <dependency>
@@ -25,11 +37,6 @@
             <artifactId>junit-jupiter</artifactId>
             <version>5.6.3</version>
             <!--            <scope>test</scope>-->
-        </dependency>
-        <dependency>
-            <groupId>org.reflections</groupId>
-            <artifactId>reflections</artifactId>
-            <version>0.9.11</version>
         </dependency>
     </dependencies>
 

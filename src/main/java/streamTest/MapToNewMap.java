@@ -9,7 +9,6 @@ import java.util.stream.Collectors;
 /**
  * 旧的map转换成自定义k,v的map
  * https://www.cnblogs.com/StarChen20/p/14005122.html
- *
  */
 public class MapToNewMap {
 
@@ -52,15 +51,10 @@ public class MapToNewMap {
 		map.put("d", new Student(4, "赵六"));
 
 		//需求是将Map<String,Object>改为Map<String,Object.字段>
-		Map<String, Object> collect = map.entrySet()//获取集合
-				.stream()//获取流
-				.peek(obj -> obj.setValue(((Student) obj.getValue()).getName()))//peek支持在每个元素上执行一个操作并且返回新的stream
-				// ，我们就利用这个方法转换数据
-				.collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));//collect方法用来将流转到集合对象
+		Map<String, Object> collect = map.entrySet().stream().peek(obj -> obj.setValue(((Student) obj.getValue()).getName())).collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
 
 		//遍历输出
 		collect.forEach((key, value) -> System.out.println(key + "：" + value));
-
 	}
 
 }
