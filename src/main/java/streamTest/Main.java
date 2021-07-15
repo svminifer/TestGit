@@ -201,10 +201,13 @@ public class Main {
 
         // ================ 利用Java8的Stream流实现合并 =========================
         List<Map<String, Object>> combine = sourceList.stream()
-                .collect(Collectors.groupingBy(group -> group.get("id").toString())) // 根据map中id的value值进行分组, 这一步的返回结果Map<String,List<Map<String, Object>>>
-                .entrySet() // 得到Set<Map.Entry<String, List<Map<String, Object>>>
-                .stream() // 使用Java8的流
-                .map(m -> { // 进入映射环境
+                // 根据map中id的value值进行分组, 这一步的返回结果Map<String,List<Map<String, Object>>>
+                .collect(Collectors.groupingBy(group -> group.get("id").toString()))
+                // 得到Set<Map.Entry<String, List<Map<String, Object>>>
+                .entrySet()
+                .stream()
+                // 进入映射环境
+                .map(m -> {
                     // m.getValue()的结果是 List<Map<String, Object>>
                     Map<String, Object> collect = m.getValue().stream()
                             // o.entrySet() 的结果是 Set<Map.Entry<String, Object>>
@@ -212,11 +215,10 @@ public class Main {
                             // (m1, m2) -> m2 的意思是如果 m1 == m2 则使用m2
                             .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (m1, m2) -> m2));
                     return collect;
-                }).collect(Collectors.toList());
-
+                })
+                .collect(Collectors.toList());
         // 输出测试，
         combine.forEach(System.err::println);
-
         /*
           测试结果：
              {nn=小张, ww=小强, ab=甲, ac=乙, id=1}
