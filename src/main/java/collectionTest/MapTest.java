@@ -1,7 +1,8 @@
 package collectionTest;
 
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 
@@ -22,48 +23,26 @@ public class MapTest {
 		booleanKeyTestByType();
 	}
 
-	public static void booleanKeyTest(Long roleId) {
+	public static void booleanKeyTest(Long roleId){
 		System.out.println(queueConscription.containsKey(roleId));
-		if (queueConscription.containsKey(roleId) && queueConscription.get(roleId).containsKey(1)) {
+		if (queueConscription.containsKey(roleId) && queueConscription.get(roleId).containsKey(1)){
 			System.out.println(1);
 			return;
 		}
 		System.out.println(2);
 	}
 
-	public static void booleanKeyTestByType() {
+	public static void booleanKeyTestByType(){
 		HashMap<Long, String> map = new HashMap<>();
-		map.put(1L, "100");
-		map.put(2L, "200");
-		map.put(3L, "300");
+		map.put(1L,"100");
+		map.put(2L,"200");
+		map.put(3L,"300");
 
-		long val = 1L;
+		long val=1L;
 
-		System.out.println(map.containsKey(val));
-		System.out.println(map.get(val));
+		 System.out.println(map.containsKey(val));
+		 System.out.println(map.get(val));
 	}
 
-	public static void keyEquals() {
-		Set<Integer> set = new HashSet<>();
-
-		set.add(1);
-		set.add(new Integer(2));
-		set.add(new Integer(200));
-		set.add(298);
-
-		LinkedList<Integer> linkedList = new LinkedList<>();
-
-		linkedList.add(1);
-		linkedList.add(new Integer(2));
-		linkedList.add(new Integer(200));
-		linkedList.add(298);
-
-		Integer last = linkedList.getLast();
-
-		for (int i = 0; i < linkedList.size(); i++) {
-			System.out.println(linkedList.get(i));
-			System.out.println(set.contains(linkedList.get(i)));
-		}
-	}
 
 }
