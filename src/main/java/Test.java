@@ -34,7 +34,8 @@ public class Test {
 
         System.out.println("测试新 user");
 
-
-    }
+		HashMap<String, String> objectObjectHashMap = new HashMap<>();
+		objectObjectHashMap.remove("123");
+	}
 
 }
