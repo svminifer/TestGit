@@ -1,12 +1,15 @@
 package streamTest;
 
 
+import api.compareTest.Student;
 import enumTest.playerTest.Player;
 import org.junit.jupiter.api.Test;
 
 import java.util.*;
 
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.function.BinaryOperator;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -244,6 +247,16 @@ public class Main {
 	public void streamCount() {
 		List<Player> list = new ArrayList<>();
 		double max = list.stream().mapToDouble(Player::getId).sum();
+	}
+
+	/**
+	 * 分组然后取最大值
+	 */
+	@Test
+	public void groupByAndGetMax(){
+		List<Student> studentList = new ArrayList<>();
+		Map<Integer, Student> tempMap = studentList.stream()
+				.collect(Collectors.toMap(Student::getAge, Function.identity(), BinaryOperator.maxBy(Comparator.comparing(Student::getAge))));
 	}
 
 }

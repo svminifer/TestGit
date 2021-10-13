@@ -22,20 +22,32 @@ public class Test {
 
 		Double aDouble = new Double(1.0);
 
-        Double dfdf = null;
+		Double dfdf = null;
 
-        HashMap<Integer, String> map = new HashMap<>();
+		HashMap<Integer, String> map = new HashMap<>();
 
-        Integer integer = new Integer(122222);
-        int ints = 122222;
-        map.put(integer, "1");
-        map.put(122222, "2");
-        map.put(ints, "3");
+		Integer integer = new Integer(122222);
+		int ints = 122222;
+		map.put(integer, "1");
+		map.put(122222, "2");
+		map.put(ints, "3");
 
-        System.out.println("测试新 user");
+		System.out.println("测试新 user");
 
 		HashMap<String, String> objectObjectHashMap = new HashMap<>();
 		objectObjectHashMap.remove("123");
+
+		Map<Long, Integer> testMap = new ConcurrentHashMap<>();
+
+		Integer value = testMap.computeIfAbsent(100L, uid -> 0);
+		value = value + 123;
+
+		Integer integers = testMap.computeIfAbsent(100L, uid -> 0);
+		value = value + 123;
+
+		Integer integer1 = testMap.putIfAbsent(100L, 100);
+
+		System.out.println(testMap.get(100L));
 	}
 
 }

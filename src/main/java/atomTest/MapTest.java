@@ -1,8 +1,11 @@
 package atomTest;
 
 
-import java.util.HashMap;
-import java.util.Map;
+import api.compareTest.Student;
+import com.sun.org.apache.regexp.internal.RE;
+import interfaceTest.demo.Person;
+
+import java.util.*;
 
 
 public class MapTest {
@@ -70,11 +73,30 @@ public class MapTest {
 		System.out.println(map.get(4));
 		System.out.println(map.containsKey(4));
 	}
+//
+//	public static void main(String[] args) {
+//
+////		computeIfAbsentTest();
+////		computeIfParentTest();
+//
+//		List<Student> chapterInfoList = new ArrayList();
+//		chapterInfoList.add(new Student("213","123",123));
+//		chapterInfoList.add(new Student("213","123",124));
+//		chapterInfoList.add(new Student("213","123",125));
+//		Student student = chapterInfoList.stream().max(Comparator.comparingInt(Student::getAge)).get();
+//		System.out.println(student);
+//	}
 
 	public static void main(String[] args) {
+		List<Student> students = new ArrayList<>();
+		students.add(new Student("2", "2", 2));
+		students.add(new Student("123", "1", 1));
+		students.add(new Student("0", "0", 0));
 
-//		computeIfAbsentTest();
-		computeIfParentTest();
+		students.sort(Comparator.comparingInt(Student::getAge));
+		System.out.println(students);
+		Student student = students.stream().max(Comparator.comparingInt(Student::getAge)).orElse(new Student("1", "1", -1));
+		System.out.println(student);
 	}
 
 }
