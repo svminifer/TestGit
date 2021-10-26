@@ -253,10 +253,26 @@ public class Main {
 	 * 分组然后取最大值
 	 */
 	@Test
-	public void groupByAndGetMax(){
+	public void groupByAndGetMax() {
 		List<Student> studentList = new ArrayList<>();
-		Map<Integer, Student> tempMap = studentList.stream()
-				.collect(Collectors.toMap(Student::getAge, Function.identity(), BinaryOperator.maxBy(Comparator.comparing(Student::getAge))));
+		Map<Integer, Student> tempMap = studentList.stream().collect(Collectors.toMap(Student::getAge, Function.identity(), BinaryOperator.maxBy(Comparator.comparing(Student::getAge))));
+	}
+
+	/**
+	 * 分组然后取每组第一个
+	 */
+	@Test
+	public void groupByAndGetFirst() {
+		List<Student> couponList = new ArrayList<>();
+		Student student1 = new Student("1", "1", 1);
+		Student student2 = new Student("2", "2", 2);
+		Student student3 = new Student("3", "3", 3);
+		Student student4 = new Student("4", "4", 4);
+		couponList.add(student1);
+		couponList.add(student2);
+		couponList.add(student3);
+		couponList.add(student4);
+		Map<Integer, Student> resultList = couponList.stream().collect(Collectors.groupingBy(Student::getAge, Collectors.collectingAndThen(Collectors.toList(), value -> value.get(0))));
 	}
 
 }
