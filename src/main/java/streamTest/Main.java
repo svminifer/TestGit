@@ -273,6 +273,10 @@ public class Main {
 		couponList.add(student3);
 		couponList.add(student4);
 		Map<Integer, Student> resultList = couponList.stream().collect(Collectors.groupingBy(Student::getAge, Collectors.collectingAndThen(Collectors.toList(), value -> value.get(0))));
+
+		Map<Integer, Map<Integer, Student>> activityMap = couponList.stream().collect(Collectors.groupingBy(Student::getAge,Collectors.groupingBy(Student::getAge,Collectors.collectingAndThen(Collectors.toList(), value -> value.get(0)))));
+
+		System.out.println(activityMap);
 	}
 
 }
