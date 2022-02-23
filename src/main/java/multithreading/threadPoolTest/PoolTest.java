@@ -32,9 +32,8 @@ public class PoolTest {
 
         NameTheadFactory(String name){
             SecurityManager s = System.getSecurityManager();
-            group = (s != null) ? s.getThreadGroup() :
-                    Thread.currentThread().getThreadGroup();
-//此时namePrefix就是 name + 第几个用这个工厂创建线程池的
+            group = (s != null) ? s.getThreadGroup() : Thread.currentThread().getThreadGroup();
+            //此时namePrefix就是 name + 第几个用这个工厂创建线程池的
             this.namePrefix = name +
                     poolNumber.getAndIncrement();
         }
@@ -97,10 +96,23 @@ public class PoolTest {
     public static void mainTOHandler() {
         ThreadPoolExecutor executor = new ThreadPoolExecutor(5, 6, 10, TimeUnit.SECONDS, new ArrayBlockingQueue<>(1),new NameTheadFactory("TestMain!!!!-"), new ThreadPoolExecutor.CallerRunsPolicy());
 
+        ThreadPoolExecutor executor2 = new ThreadPoolExecutor(5, 6, 10, TimeUnit.SECONDS, new ArrayBlockingQueue<>(1),new NameTheadFactory("TestMain!!!!-"), new ThreadPoolExecutor.CallerRunsPolicy());
 
 
         for (int i = 0; i < 500; i++) {
             executor.execute(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        long time=(long) (Math.random()*1000);
+                        Thread.sleep(time);
+                        System.out.println(Thread.currentThread().getName()+" date:"+ Instant.now()+" "+time);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+            executor2.execute(new Runnable() {
                 @Override
                 public void run() {
                     try {

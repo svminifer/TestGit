@@ -1,6 +1,7 @@
 package streamTest;
 
 
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -32,6 +33,14 @@ public class MergeTwoDIffMap {
 		}
 
 		System.out.println(map1);
+	}
+
+	public static void main(String[] args) {
+		double time = System.currentTimeMillis() / 1000;
+		double time1 = (System.currentTimeMillis() + 60000) / 1000;
+
+		System.out.println(time);
+		System.out.println(time1);
 	}
 
 }
