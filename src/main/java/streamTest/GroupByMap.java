@@ -33,6 +33,15 @@ public class GroupByMap {
 	//User{name='jerry', phone='dd', address='ee', scope=70}
 	//
 	//User{name='tom', phone='bb', address='cc', scope=150}
+
+	/**
+	 * 分组后取list的第一个
+	 */
+	public static void MapgroupByAndGetOne() {
+		List<User> arrayList = new ArrayList<>();
+		Map<String, User> userMap = arrayList.stream().filter(user -> user.getPhone() == "123")
+				.collect(Collectors.groupingBy(User::getName, Collectors.collectingAndThen(Collectors.toList(), users -> users.get(0))));
+	}
 }
 
 
