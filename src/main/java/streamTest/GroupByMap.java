@@ -15,17 +15,26 @@ public class GroupByMap {
 
 		List<User> users = new ArrayList();
 
-		users.add(new User("tom", "bb", "cc", 100l));
+		users.add(new User("tom", "bb", "cc", 1001));
 
-		users.add(new User("tom", "bb", "cc", 50l));
+		users.add(new User("tom", "bb", "cc", 414));
+		users.add(new User("tom", "bb", "cc", 5014));
 
-		users.add(new User("jerry", "dd", "ee", 30l));
+		users.add(new User("jerry", "dd", "ee", 30254));
 
-		users.add(new User("jerry", "dd", "ee", 40l));
-		Map<String, LongSummaryStatistics> collect = users.stream().collect(Collectors.groupingBy(user -> user.getName(), Collectors.summarizingLong(user -> user.scope)));
-		collect.forEach((k, v) -> {
-			System.out.println(k + " " + v.getSum());
-		});
+		users.add(new User("jerry", "dd", "ee", 250));
+		//Map<String, LongSummaryStatistics> collect = users.stream().collect(Collectors.groupingBy(user -> user.getName(), Collectors.summarizingLong(user -> user.scope)));
+		//collect.forEach((k, v) -> {
+		//	System.out.println(k + " " + v.getSum());
+		//});
+		Map<String, Object> collect = users.stream()
+				.collect(Collectors.groupingBy(User::getName, Collectors.collectingAndThen(Collectors.toList(), u -> sortUser(u))));
+		System.out.println();
+	}
+
+	public static List<User> sortUser(List<User> u) {
+		u.sort((o1, o2) -> (int) (o1.getScope() - o2.getScope()));
+		return u;
 	}
 
 	//运行结果
@@ -38,10 +47,24 @@ public class GroupByMap {
 	 * 分组后取list的第一个
 	 */
 	public static void MapgroupByAndGetOne() {
-		List<User> arrayList = new ArrayList<>();
-		Map<String, User> userMap = arrayList.stream().filter(user -> user.getPhone() == "123")
-				.collect(Collectors.groupingBy(User::getName, Collectors.collectingAndThen(Collectors.toList(), users -> users.get(0))));
+		//List<User> arrayList = new ArrayList<>();
+		//Map<String, User> userMap = arrayList.stream().filter(user -> user.getPhone() == "123")
+		//		.collect(Collectors.groupingBy(User::getName, Collectors.collectingAndThen(Collectors.toList(), users -> users.get(0))));
 	}
+
+	/**
+	 * 分组后排序
+	 */
+	public static void MapGroupByAndSort() {
+		//List<SeasonLevelWrapper> wrapperList = containerManager.getAll(SeasonLevelWrapper.class);
+		//seasonLevelMap = wrapperList.stream()
+		//		.collect(Collectors.groupingBy(SeasonLevelWrapper::getLayerTypeID, Collectors.collectingAndThen(Collectors.toList(), seasonLevelWrappers -> sortWrapper(seasonLevelWrappers))));
+	}
+
+	//public List<SeasonLevelWrapper> sortWrapper(List<SeasonLevelWrapper> wrapperList) {
+	//	wrapperList.sort(Comparator.comparingInt(SeasonLevelConfig::getId));
+	//	return wrapperList;
+	//}
 }
 
 
@@ -53,7 +76,7 @@ class User {
 
 	public String address;
 
-	public Long scope;
+	public int scope;
 
 	public User(String name, String phone, String address) {
 
@@ -64,7 +87,7 @@ class User {
 		this.address = address;
 	}
 
-	public User(String name, String phone, String address, Long scope) {
+	public User(String name, String phone, String address, int scope) {
 
 		this.name = name;
 
@@ -144,11 +167,11 @@ class User {
 		this.address = address;
 	}
 
-	public Long getScope() {
+	public int getScope() {
 		return scope;
 	}
 
-	public void setScope(Long scope) {
+	public void setScope(int scope) {
 		this.scope = scope;
 	}
 
