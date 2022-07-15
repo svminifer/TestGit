@@ -3,6 +3,7 @@ package juc;
 
 /**
  * 老师对象
+ * 1
  */
 public class Teacher implements Callback {
 
